@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class AdminController extends Controller
 {
 
     public function index()
     {
-        return view("admin.home");
+        $users = User::all();
+        return view("admin.index", compact("users"));
+    }
+
+    public function status(User $user)
+    {
+
+        $user->Update([
+            "activated" => !$user->activate,
+        ]);
+
+        session()->flash("success", "Status changed Successfully");
+
+        return back();
     }
 
     public function check(Request $request)

@@ -18,7 +18,8 @@ class UserController extends Controller
 
     public function create(Request $request){
         $validated = $request->validate([
-            "name"=> "required",
+            "name"=> "required|min:3",
+            "phone"=> "required|min:11|max:11",
             "email" => "required|email|unique:users,email",
             "password" => "confirmed|min:5|max:30|confirmed"
         ]);

@@ -23,44 +23,51 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.register') }}">Register</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.register') }}">Register</a>
+                        </li>
                     @endguest
 
                     @auth
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ \Auth::guard('web')->user()->name }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li> <a class="dropdown-item" href="{{ route('user.logout') }}"
-                                    onclick="event.preventDefault();
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ \Auth::guard('web')->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li> <a class="dropdown-item" href="{{ route('user.logout') }}"
+                                        onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                                        {{ __('Logout') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
+                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
                     @endauth
                 </ul>
 
             </div>
         </div>
     </nav>
+
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
 
     <main class="py-4">
         @yield('content')

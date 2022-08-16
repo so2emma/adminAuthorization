@@ -68,6 +68,17 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="phone"> Phone Number</label>
+                        <input type="text" name="phone" placeholder="Enter Phone Number" class="form-control" value="{{ old("phone") }}">
+
+                        @error("phone")
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="email">Email</label>
                         <input type="email" name="email" placeholder="Enter Email" class="form-control" value="{{ old("email") }}">
 
