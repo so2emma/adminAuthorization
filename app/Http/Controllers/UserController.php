@@ -51,9 +51,20 @@ class UserController extends Controller
         ]);
 
         if (Auth::guard("web")->attempt($credentials)) {
-            $request->session()->regenerate();
+            if(!Auth::guard("web")->user()->activated)
+            {
+                Auth::guard("web")->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
 
-            return redirect()->route("user.home");
+                return back()->withErrors([
+                    'email' => 'Wait for admin to activate your account',
+                ])->onlyInput('email');
+            }else{
+                $request->session()->regenerate();
+                return redirect()->route("user.home");
+            }
+
         }
 
         return back()->withErrors([
