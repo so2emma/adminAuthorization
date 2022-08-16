@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
 
+    public function index()
+    {
+        return view("admin.home");
+    }
 
     public function check(Request $request)
     {
@@ -20,7 +24,7 @@ class AdminController extends Controller
         if(Auth::guard("admin")->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route("admin.home");
+            return redirect()->route("admin.index");
         }
 
         return back()->withErrors([
