@@ -5,22 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if(isset($request->status)){
+            $users = DB::table('users')->where('activated', $request->status)->get();
+
+        }else{
+            $users = User::all();
+        }
         return view("admin.index", compact("users"));
     }
 
     public function status(User $user)
     {
-
+        if ($user->activated)
+        {
+            $status = false;
+        }
+        else{
+            $status = true;
+        }
         $user->Update([
-            "activated" => !$user->activate,
+            "activated" => $status,
         ]);
 
         session()->flash("success", "Status changed Successfully");

@@ -44,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isActivated()
+    public function messages()
     {
-        return $this->activated;
+        return $this->hasMany(Message::class);
     }
 }
