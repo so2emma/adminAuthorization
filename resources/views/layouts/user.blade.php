@@ -33,7 +33,10 @@
 
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route("user.home") }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route("user.message.create") }}">Create Message</a>
                         </li>
 
                         <li class="nav-item dropdown">

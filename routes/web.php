@@ -33,6 +33,10 @@ Route::prefix("user")->name("user.")->group(function() {
     Route::middleware(["auth:web", 'PreventBackHistory'])->group(function() {
         Route::get("/home", [UserController::class, "home"])->name("home");
         Route::post("/logout", [UserController::class, "logout"])->name("logout");
+
+        // message links
+        Route::view("/message/create", "user.message_create")->name("message.create");
+        Route::post("/message/store", [UserController::class, "message_store"])->name("message.store");
     });
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -81,5 +82,22 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function message_store(Request $request)
+    {
+        $request->validate([
+            "message" => "required|min:10",
+        ]);
+
+        $id = auth()->user()->id;
+
+        Message::create([
+            "user_id" => $id,
+            "message" => $request->message,
+        ]);
+
+        session()->flash("success", "Message Sent Successfully");
+        return redirect()->route("user.home");
     }
 }
