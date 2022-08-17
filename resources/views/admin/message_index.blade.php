@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 overflow-auto">
                 <h4 class="text-center py-5">All Messages sent to ADMIN </h4>
                 <table class="table">
                     <thead>
@@ -31,6 +31,8 @@
                     @endif
 
                 </table>
+
+                {{ $messages->links() }}
             </div>
         </div>
     </div>

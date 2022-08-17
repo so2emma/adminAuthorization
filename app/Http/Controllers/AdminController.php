@@ -71,7 +71,7 @@ class AdminController extends Controller
 
     public function message_index()
     {
-        $messages = Message::all();
+        $messages = Message::paginate(10);
         return view("admin.message_index", compact("messages"));
     }
 }
