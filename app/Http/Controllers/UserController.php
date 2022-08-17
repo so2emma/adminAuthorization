@@ -31,18 +31,8 @@ class UserController extends Controller
             "password" => Hash::make($validated["password"])
         ]);
 
-        if (Auth::guard("web")->attempt(["email"=>$validated["email"], "password"=>$validated["password"]])) {
-            $request->session()->regenerate();
-
-            return redirect()->route("user.home");
-        }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-
-        // session()->flash("success", "You have registered successfully");
-
-        // return redirect()->back();
+        session()->flash("success", "You have registered successfully, wait for admin to activate your account");
+        return redirect()->back();
     }
 
     public function check(Request $request)
@@ -60,7 +50,7 @@ class UserController extends Controller
                 $request->session()->regenerateToken();
 
                 return back()->withErrors([
-                    'email' => 'Wait for admin to activate your account',
+                    'email' => 'Your account activation is pending at the moment',
                 ])->onlyInput('email');
             }else{
                 $request->session()->regenerate();
