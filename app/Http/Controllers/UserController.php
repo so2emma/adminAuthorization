@@ -100,4 +100,10 @@ class UserController extends Controller
         session()->flash("success", "Message Sent Successfully");
         return redirect()->route("user.home");
     }
+
+    public function message_index()
+    {
+        $messages = User::find(auth()->user()->id)->messages;
+        return view("user.message_index", compact("messages"));
+    }
 }

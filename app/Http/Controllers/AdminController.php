@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,5 +67,11 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function message_index()
+    {
+        $messages = Message::all();
+        return view("admin.message_index", compact("messages"));
     }
 }

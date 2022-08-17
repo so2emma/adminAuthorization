@@ -34,9 +34,10 @@ Route::prefix("user")->name("user.")->group(function() {
         Route::get("/home", [UserController::class, "home"])->name("home");
         Route::post("/logout", [UserController::class, "logout"])->name("logout");
 
-        // message links
+        // message routes
         Route::view("/message/create", "user.message_create")->name("message.create");
         Route::post("/message/store", [UserController::class, "message_store"])->name("message.store");
+        Route::get("/message/index", [UserController::class, "message_index"])->name("message.index");
     });
 });
 
@@ -52,6 +53,9 @@ Route::prefix("admin")->name("admin.")->group(function() {
         Route::get("/index",[AdminController::class, "index"])->name("index");
         Route::post("/logout", [AdminController::class, "logout"])->name("logout");
         Route::post("/status/{user}", [AdminController::class, "status"])->name("status");
+
+        // message routes
+        Route::get("/message/index", [AdminController::class, "message_index"])->name("message.index");
 
     });
 });
