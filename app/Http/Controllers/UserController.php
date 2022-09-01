@@ -6,6 +6,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 
@@ -14,7 +15,20 @@ class UserController extends Controller
 
     public function home ()
     {
-        return view("user.home");
+        $pending = Auth::guard("web")->user()->tasks->where("status", "=", "pending");
+        $done = Auth::guard("web")->user()->tasks->where("status", "=", "done");
+        $overdue = Auth::guard("web")->user()->tasks->where("status", "=", "overdue");
+
+        // $tasks = Auth::guard("web")->user()->tasks->latest()->take(5)->get();
+        // $tasks = Auth::guard("web")->user()->tasks->take(5);
+        $tasks = DB::table('tasks')
+                    ->where('user_id', '=', Auth::guard("web")->user()->id )
+                    ->latest()
+                    ->take(5)
+                    ->get();
+
+        // dd($tasks);
+        return view("user.home", compact("pending", "done", "overdue", "tasks"));
     }
 
     public function create(Request $request){
