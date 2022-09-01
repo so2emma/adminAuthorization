@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,9 +37,17 @@ Route::prefix("user")->name("user.")->group(function() {
         Route::post("/logout", [UserController::class, "logout"])->name("logout");
 
         // message routes
-        Route::view("/message/create", "user.message_create")->name("message.create");
-        Route::post("/message/store", [UserController::class, "message_store"])->name("message.store");
-        Route::get("/message/index", [UserController::class, "message_index"])->name("message.index");
+        Route::prefix("message")->name("message.")->group(function() {
+            Route::view("/create", "user.message.create")->name("create");
+            Route::post("/store", [UserController::class, "message_store"])->name("store");
+            Route::get("/index", [UserController::class, "message_index"])->name("index");
+        });
+
+        /**
+         * Tasks Route
+         */
+        Route::resource("task", TaskController::class);
+
     });
 });
 
@@ -56,6 +66,11 @@ Route::prefix("admin")->name("admin.")->group(function() {
 
         // message routes
         Route::get("/message/index", [AdminController::class, "message_index"])->name("message.index");
+
+        /**
+         * CATEGORY ROUTES
+         **/
+        Route::resource('category', CategoryController::class);
 
     });
 });

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">USER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -39,12 +39,11 @@
                             <a class="nav-link active" aria-current="page" href="{{ route('user.home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('user.message.create') }}">Create
-                                Message</a>
+                            <a class="nav-link active" aria-current="page"
+                                href="{{ route('user.message.index') }}">Messages</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('user.message.index') }}">Show
-                                Message</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('user.task.index') }}">Tasks</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -79,6 +78,18 @@
             {{ session()->get('success') }}
         </div>
     @endif
+
+    <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger m-3">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
 
     <main class="py-4">
         @yield('content')

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">ADMIN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -36,8 +36,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('admin.message.index') }}">View
-                                all Message</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.message.index') }}">Message</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.category.index') }}">Category</a>
                         </li>
 
                         <li class="nav-item dropdown">
