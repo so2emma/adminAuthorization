@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('content')
-    <div class="container overflow-hidden">
+    <div class="container">
 
         <h3>Dashboard</h3>
 

@@ -101,7 +101,7 @@ class AdminTaskController extends Controller
     {
         Task::destroy($id);
 
-        session()->flash("success", "Category Deleted Successfully");
-        return redirect()->route("admin.category.index");
+        session()->flash("success", "Task Deleted Successfully");
+        return redirect()->route("admin.task.index");
     }
 }

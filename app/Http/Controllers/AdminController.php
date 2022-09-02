@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,27 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+
+    public function dashboard()
+    {
+        $pending = Task::all()->where("status", "=", "pending");
+        $done = Task::all()->where("status", "=", "done");
+        $overdue = Task::all()->where("status", "=", "overdue");
+
+        $users = User::all();
+
+        $tasks = DB::table('tasks')
+                    ->latest()
+                    ->take(5)
+                    ->get();
+
+        $users = DB::table('users')
+                    ->latest()
+                    ->take(5)
+                    ->get();
+
+        return view("admin.dashboard", compact("pending", "done", "overdue", "users", "tasks", "users"));
+    }
 
     public function index(Request $request)
     {

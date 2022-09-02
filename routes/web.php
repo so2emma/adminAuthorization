@@ -62,6 +62,7 @@ Route::prefix("admin")->name("admin.")->group(function() {
         Route::post("/check", [AdminController::class, "check"])->name("check");
     });
     Route::middleware(["auth:admin", 'PreventBackHistory'])->group(function() {
+        Route::get("/dashboard/", [AdminController::class, "dashboard"])->name("dashboard");
         Route::get("/index",[AdminController::class, "index"])->name("index");
         Route::post("/logout", [AdminController::class, "logout"])->name("logout");
         Route::post("/status/{user}", [AdminController::class, "status"])->name("status");

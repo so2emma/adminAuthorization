@@ -32,7 +32,11 @@
 
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('admin.index') }}">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.index') }}">User(Manage)</a>
                         </li>
 
                         <li class="nav-item">
