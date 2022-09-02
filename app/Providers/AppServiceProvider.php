@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        FakerFactory::class;
 
     }
 
