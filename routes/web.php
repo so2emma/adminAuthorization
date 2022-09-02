@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTaskController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +73,12 @@ Route::prefix("admin")->name("admin.")->group(function() {
          * CATEGORY ROUTES
          **/
         Route::resource('category', CategoryController::class);
+
+        /**
+         * Admin Task Routes
+         */
+        Route::resource("task", AdminTaskController::class);
+
 
     });
 });

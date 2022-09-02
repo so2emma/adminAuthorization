@@ -6,9 +6,10 @@ use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
-class TaskController extends Controller
+class AdminTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Auth::guard("web")->user()->tasks;
-        return view("user.task.index", compact("tasks"));
+        $tasks = Task::all();
+        return view("admin.task.index", compact("tasks"));
     }
 
     /**
@@ -28,8 +29,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $categories = Category::where("status" ,"=", "active")->get();
-        return view("user.task.create", compact("categories"));
+
     }
 
     /**
@@ -40,21 +40,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            "title" => "required|min:3",
-            "category" => "required",
-            "deadline" => "required",
-            "status" => "required|min:3",
-        ]);
 
-        $category = Category::where("title" ,"=", $request->category)->first();
-        $validated["category_id"] = $category->id;
-        $validated["user_id"] = Auth::guard('web')->user()->id;
-
-        Task::create($validated);
-
-        session()->flash("success", "Task Created Successfully");
-        return redirect()->route("user.task.index");
     }
 
     /**
@@ -77,7 +63,7 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $categories = Category::where("status" ,"=", "active")->get();
-        return view("user.task.edit", compact("task", "categories"));
+        return view("admin.task.edit", compact("task", "categories"));
     }
 
     /**
@@ -102,7 +88,7 @@ class TaskController extends Controller
         $task->update($validated);
 
         session()->flash("success", "Task Updated Successfully");
-        return redirect()->route("user.task.index");
+        return redirect()->route("admin.task.index");
     }
 
     /**
@@ -116,6 +102,6 @@ class TaskController extends Controller
         Task::destroy($id);
 
         session()->flash("success", "Category Deleted Successfully");
-        return redirect()->route("user.category.index");
+        return redirect()->route("admin.category.index");
     }
 }

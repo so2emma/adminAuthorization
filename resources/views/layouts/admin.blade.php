@@ -43,6 +43,10 @@
                             <a class="nav-link active" aria-current="page" href="{{ route('admin.category.index') }}">Category</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('admin.task.index') }}">Task</a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
