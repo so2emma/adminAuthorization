@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <h4>No. of registered users: {{ count($users) }}</h4>
+    <h4>No. of registered users: {{ count($all_user) }}</h4>
 
 
     <h3 class="pt-5">Latests Tasks</h3>
@@ -86,7 +86,7 @@
                     @endforeach
                 </tbody>
                 @else
-                <div class="alert alert-danger">
+                <div class="text-danger">
                     <h4>No User</h4>
                 </div>
 

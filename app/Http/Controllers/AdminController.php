@@ -19,7 +19,7 @@ class AdminController extends Controller
         $done = Task::all()->where("status", "=", "done");
         $overdue = Task::all()->where("status", "=", "overdue");
 
-        $users = User::all();
+        $all_user = User::all();
 
         $tasks = DB::table('tasks')
                     ->latest()
@@ -31,7 +31,7 @@ class AdminController extends Controller
                     ->take(5)
                     ->get();
 
-        return view("admin.dashboard", compact("pending", "done", "overdue", "users", "tasks", "users"));
+        return view("admin.dashboard", compact("pending", "done", "overdue", "users", "tasks", "users", "all_user"));
     }
 
     public function index(Request $request)
